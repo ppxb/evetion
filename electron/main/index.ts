@@ -17,11 +17,11 @@ if (!app.requestSingleInstanceLock()) {
   process.exit(0)
 }
 
-// process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 
 let win: BrowserWindow | null = null
 const preload = join(__dirname, '../preload/index.ts')
-const url = process.env.DEV_SERVER_URL as string
+const url = 'http://127.0.0.1:5173'
 const indexHtml = join(process.env.DIST, 'index.html')
 
 const createWindow = async () => {
@@ -45,7 +45,8 @@ const createWindow = async () => {
   } else {
     win.loadURL(url)
   }
-  // win.once('ready-to-show', () => win?.show())
+
+  win.once('ready-to-show', () => win?.show())
   // win.webContents.openDevTools()
 
   ipcMain.on('close-app', () => win?.close())

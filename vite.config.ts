@@ -11,7 +11,7 @@ export default defineConfig({
     vue(),
     electron({
       main: {
-        entry: 'electron/main/index.js',
+        entry: 'electron/main/index.ts',
         vite: {
           build: {
             sourcemap: true,
@@ -22,7 +22,7 @@ export default defineConfig({
       },
       preload: {
         input: {
-          index: join(__dirname, 'electron/preload/index.js')
+          index: join(__dirname, 'electron/preload/index.ts')
         },
         vite: {
           build: {
@@ -33,9 +33,5 @@ export default defineConfig({
       },
       renderer: {}
     })
-  ],
-  server: {
-    host: '127.0.0.1',
-    port: 5173
-  }
+  ]
 })
