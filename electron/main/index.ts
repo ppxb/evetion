@@ -20,15 +20,16 @@ if (!app.requestSingleInstanceLock()) {
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 
 let win: BrowserWindow | null = null
-const preload = join(__dirname, '../preload/index.ts')
+
 const url = 'http://127.0.0.1:5173'
+const preload = join(__dirname, '../preload/index.ts')
 const indexHtml = join(process.env.DIST, 'index.html')
 
 const createWindow = async () => {
   win = new BrowserWindow({
     title: 'Evetion',
-    width: 1336,
-    height: 768,
+    width: 900,
+    height: 600,
     resizable: false,
     show: false,
     frame: false,
@@ -48,10 +49,6 @@ const createWindow = async () => {
 
   win.once('ready-to-show', () => win?.show())
   // win.webContents.openDevTools()
-
-  ipcMain.on('close-app', () => win?.close())
-
-  ipcMain.on('min-app', () => win?.minimize())
 }
 
 app.whenReady().then(createWindow)
@@ -72,4 +69,15 @@ app.on('second-instance', () => {
 app.on('window-all-closed', () => {
   win = null
   if (process.platform !== 'darwin') app.quit()
+})
+
+ipcMain.on('close-app', () => win?.close())
+
+ipcMain.on('min-app', () => win?.minimize())
+
+ipcMain.handle('scale-app', () => {
+  win?.setOpacity(0)
+  win?.setContentSize(1336, 768)
+  win?.center()
+  win?.setOpacity(1)
 })
