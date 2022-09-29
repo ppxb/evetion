@@ -14,7 +14,7 @@
           </h1>
           <p class="text-lg">该项目作为 Evetion LTS 版本提供技术支持</p>
         </div>
-        <div class="font-medium">
+        <div class="font-medium text-sm">
           <div>2022 © Built by ppxb</div>
           <div>ver.20220929</div>
         </div>
