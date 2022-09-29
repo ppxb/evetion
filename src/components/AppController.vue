@@ -1,9 +1,8 @@
 <template>
   <div class="app-controller">
-    <app-icon name="icon-language" @click="openSetting" />
-    <app-icon name="setting" @click="openSetting" />
-    <app-icon name="mins" @click="minApp" />
-    <app-icon name="close" @click="closeApp" />
+    <app-icon name="icon-setting" @click="openSetting" />
+    <app-icon name="icon-mins" @click="minApp" />
+    <app-icon name="icon-close" @click="closeApp" />
   </div>
 </template>
 
@@ -26,6 +25,6 @@ const openSetting = () => console.log('setting panle is opened')
   justify-content: flex-end;
   padding: 1rem 2rem 1rem 0;
   background: transparent;
-  z-index: 99999;
+  z-index: 999;
 }
 </style>

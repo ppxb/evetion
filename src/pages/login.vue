@@ -2,7 +2,7 @@
   <div class="flex h-screen">
     <div class="flex flex-row w-full">
       <div
-        class="flex flex-col justify-between bg-[#ffe85c] p-8 text-slate-800"
+        class="flex flex-col justify-between bg-[#ffe85c] py-12 px-8 text-slate-800"
       >
         <div class="flex items-center justify-start space-x-3">
           <span class="bg-white rounded w-8 h-8"></span>
@@ -14,11 +14,14 @@
           </h1>
           <p class="text-lg">该项目作为 Evetion LTS 版本提供技术支持</p>
         </div>
-        <p class="font-medium">2022 © Built by ppxb</p>
+        <div class="font-medium">
+          <div>2022 © Built by ppxb</div>
+          <div>ver.20220929</div>
+        </div>
       </div>
 
       <div
-        class="flex flex-1 flex-col items-center justify-center px-10 relative text-white"
+        class="flex flex-1 flex-col items-center justify-center py-12 px-10 relative text-white"
       >
         <div class="flex flex-1 flex-col justify-center space-y-5 w-full">
           <div class="flex flex-col space-y-2">
@@ -37,7 +40,7 @@
               class="flex px-3 py-2 rounded font-medium placeholder:font-normal text-slate-800"
             />
             <button
-              class="flex items-center justify-center px-4 py-3 rounded font-bold bg-[#171717] hover:bg-black transition-all text-white"
+              class="flex items-center justify-center px-4 py-3 rounded font-bold bg-[#272727] hover:bg-[#222] transition-all text-white"
             >
               点击登录
             </button>
