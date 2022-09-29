@@ -12,17 +12,18 @@
           <h1 class="text-4xl leading-snug font-extrabold">
             体验全新的智慧化工作流
           </h1>
-          <p class="text-lg">该项目作为 Evetion 核心组件提供长期支持</p>
+          <p class="text-lg">该项目作为 Evetion LTS 版本提供技术支持</p>
         </div>
-        <p class="font-medium">2022 © Built by Ppxb</p>
+        <p class="font-medium">2022 © Built by ppxb</p>
       </div>
 
       <div
         class="flex flex-1 flex-col items-center justify-center px-10 relative text-white"
       >
         <div class="flex flex-1 flex-col justify-center space-y-5 w-full">
-          <div class="flex flex-col space-y-2 text-3xl font-bold mb-4">
-            👏 欢迎回来
+          <div class="flex flex-col space-y-2">
+            <h2 class="text-3xl font-bold mb-2">👏 欢迎回来</h2>
+            <p class="text-md">账号已实现SSO，支持 Evetion 全系统登录</p>
           </div>
           <div class="flex flex-col max-w-md space-y-5">
             <input
@@ -36,9 +37,9 @@
               class="flex px-3 py-2 rounded font-medium placeholder:font-normal text-slate-800"
             />
             <button
-              class="flex items-center justify-center flex-none px-4 py-3 rounded font-medium bg-[#171717] hover:bg-black transition-all text-white hover:"
+              class="flex items-center justify-center px-4 py-3 rounded font-bold bg-[#171717] hover:bg-black transition-all text-white"
             >
-              确认账户以登录
+              点击登录
             </button>
           </div>
         </div>
@@ -52,10 +53,3 @@
     </div>
   </div>
 </template>
-
-<style scoped>
-.break-inside {
-  -moz-column-break-inside: avoid;
-  break-inside: avoid;
-}
-</style>
