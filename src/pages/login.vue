@@ -2,10 +2,10 @@
   <div class="flex h-screen">
     <div class="flex flex-row w-full">
       <div
-        class="flex flex-col flex-auto justify-between bg-[#ffe85c] py-12 px-8 text-slate-800"
+        class="flex flex-col flex-auto justify-between bg-[#ffe85c] pb-12 pt-14 px-8 text-gray-800"
       >
         <div class="flex items-center justify-start space-x-3">
-          <span class="bg-slate-100 rounded w-8 h-8"></span>
+          <span class="bg-gray-800 rounded w-8 h-8"></span>
           <div class="font-extrabold text-2xl">Evetion</div>
         </div>
         <div>
@@ -22,7 +22,7 @@
       </div>
 
       <div
-        class="flex flex-auto flex-col items-center justify-center py-12 px-10 relative text-white"
+        class="flex flex-auto flex-col items-center justify-center py-12 px-10 relative text-gray-800"
       >
         <div class="flex flex-1 flex-col justify-center space-y-5 w-full">
           <div class="flex flex-col space-y-2">
@@ -33,15 +33,16 @@
             <input
               type="text"
               placeholder="账号"
-              class="flex px-3 py-2 rounded font-medium placeholder:font-normal text-slate-800 bg-neutral-100"
+              class="flex px-3 py-2 rounded-lg font-medium placeholder:font-normal text-gray-800 bg-neutral-100"
             />
             <input
               type="password"
               placeholder="密码"
-              class="flex px-3 py-2 rounded font-medium placeholder:font-normal text-slate-800 bg-neutral-100"
+              class="flex px-3 py-2 rounded-lg font-medium placeholder:font-normal text-gray-800 bg-neutral-100"
             />
             <button
-              class="flex items-center justify-center px-4 py-3 rounded font-bold bg-[#272727] hover:bg-[#222] transition-all text-white"
+              class="flex items-center justify-center text-md px-4 py-3 rounded-lg font-bold bg-[#ffe85c] hover:bg-[#ffe32d] transition-all ease-in text-gray-800"
+              @click="login"
             >
               点击登录
             </button>
@@ -49,11 +50,20 @@
         </div>
 
         <div
-          class="flex justify-center flex-col m-auto mb-8 text-center text-medium dark:text-slate-200"
+          class="flex justify-center flex-col m-auto mb-8 text-center text-medium dark:text-gray-200"
         >
-          <p>Contact me when you have good ideas.</p>
+          <p>Contact me if you have any good ideas.</p>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const login = () => {
+  router.push('/serviceList')
+}
+</script>

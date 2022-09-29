@@ -35,7 +35,7 @@ const createWindow = async () => {
     resizable: false,
     show: false,
     frame: false,
-    backgroundColor: '#0F0F0F',
+    backgroundColor: '#f9f9f9',
     webPreferences: {
       preload,
       nodeIntegration: false,

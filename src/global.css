@@ -33,7 +33,3 @@ button,
 input {
   -webkit-app-region: no-drag;
 }
-
-#app {
-  max-width: 1280px;
-}
