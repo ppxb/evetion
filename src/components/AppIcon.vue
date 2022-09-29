@@ -20,7 +20,7 @@ const symbolId = computed(() => `#${props.name}`)
 .svg-icon {
   width: 1.875rem;
   height: 1.875rem;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.05);
   border-radius: 4px;
   padding: 6px;
   margin-left: 0.875rem;
@@ -30,7 +30,7 @@ const symbolId = computed(() => `#${props.name}`)
   color: #212121;
 }
 .svg-icon:hover {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.1);
   cursor: pointer;
 }
 </style>
