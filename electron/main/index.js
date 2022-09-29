@@ -49,6 +49,14 @@ const createWindow = async () => {
     win.loadURL(url)
   }
 
+  win.hookWindowMessage(278, () => {
+    win.setEnabled(false)
+    setTimeout(() => {
+      win.setEnabled(true)
+    }, 100)
+    return true
+  })
+
   win.once('ready-to-show', () => win.show())
   win.webContents.openDevTools()
 }
