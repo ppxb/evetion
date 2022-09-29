@@ -2,16 +2,14 @@
   <div class="flex h-screen">
     <div class="flex flex-row w-full">
       <div
-        class="flex flex-col justify-between bg-[#ffe85c] py-12 px-8 text-slate-800"
+        class="flex flex-col flex-auto justify-between bg-[#ffe85c] py-12 px-8 text-slate-800"
       >
         <div class="flex items-center justify-start space-x-3">
           <span class="bg-white rounded w-8 h-8"></span>
           <div class="font-bold text-2xl">Evetion</div>
         </div>
-        <div class="space-y-2">
-          <h1 class="text-4xl leading-snug font-extrabold">
-            体验全新的智慧化工作流
-          </h1>
+        <div>
+          <h1 class="text-4xl font-extrabold">体验全新的智慧化工作流</h1>
           <p class="text-lg">该项目作为 Evetion LTS 版本提供技术支持</p>
         </div>
         <div class="font-medium text-sm">
@@ -21,7 +19,7 @@
       </div>
 
       <div
-        class="flex flex-1 flex-col items-center justify-center py-12 px-10 relative text-white"
+        class="flex flex-auto flex-col items-center justify-center py-12 px-10 relative text-white"
       >
         <div class="flex flex-1 flex-col justify-center space-y-5 w-full">
           <div class="flex flex-col space-y-2">

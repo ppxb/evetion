@@ -2,8 +2,8 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
   { path: '/', redirect: '/login' },
-  { path: '/login', component: () => import('../pages/Login.vue') },
-  { path: '/dashboard', component: () => import('../pages/Dashboard.vue') }
+  { path: '/login', component: () => import('../pages/login.vue') },
+  { path: '/dashboard', component: () => import('../pages/dashboard.vue') }
 ]
 
 const router = createRouter({
