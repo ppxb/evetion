@@ -22,7 +22,7 @@ process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 let win: BrowserWindow | null = null
 
 const url = 'http://127.0.0.1:5173'
-const preload = join(__dirname, '../preload/index.ts')
+const preload = join(__dirname, '../preload/index.js')
 const indexHtml = join(process.env.DIST, 'index.html')
 
 const createWindow = async () => {
@@ -37,7 +37,7 @@ const createWindow = async () => {
     webPreferences: {
       preload,
       nodeIntegration: true,
-      contextIsolation: false
+      contextIsolation: true
     }
   })
 
@@ -48,7 +48,7 @@ const createWindow = async () => {
   }
 
   win.once('ready-to-show', () => win?.show())
-  // win.webContents.openDevTools()
+  win.webContents.openDevTools()
 }
 
 app.whenReady().then(createWindow)
