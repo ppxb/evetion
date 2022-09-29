@@ -1,8 +1,9 @@
 import { defineConfig } from 'vite'
 import { rmSync } from 'fs'
-import { join } from 'path'
+import { join, resolve } from 'path'
 import vue from '@vitejs/plugin-vue'
 import electron, { onstart } from 'vite-plugin-electron'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 rmSync('dist', { recursive: true, force: true })
 
@@ -11,7 +12,7 @@ export default defineConfig({
     vue(),
     electron({
       main: {
-        entry: 'electron/main/index.ts',
+        entry: 'electron/main/index.js',
         vite: {
           build: {
             sourcemap: true,
@@ -22,7 +23,7 @@ export default defineConfig({
       },
       preload: {
         input: {
-          index: join(__dirname, 'electron/preload/index.ts')
+          index: join(__dirname, 'electron/preload/index.js')
         },
         vite: {
           build: {
@@ -32,6 +33,10 @@ export default defineConfig({
         }
       },
       renderer: {}
+    }),
+    createSvgIconsPlugin({
+      iconDirs: [resolve(process.cwd(), 'src/icons')],
+      symbolId: 'icon-[name]'
     })
   ]
 })

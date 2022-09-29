@@ -1,9 +1,11 @@
-import { BrowserWindow, app, ipcMain } from "electron"
+import { BrowserWindow, app, ipcMain } from 'electron'
 import { release } from 'os'
 import { join } from 'path'
 
 process.env.DIST = join(__dirname, '../..')
-process.env.PUBLIC = app.isPackaged ? process.env.DIST : join(process.env.DIST, '../public')
+process.env.PUBLIC = app.isPackaged
+  ? process.env.DIST
+  : join(process.env.DIST, '../public')
 
 // disable GPU Acceleration for Windows 7
 if (release().startsWith('6.1')) app.disableHardwareAcceleration()
@@ -19,7 +21,7 @@ if (!app.requestSingleInstanceLock()) {
 
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 
-let win: BrowserWindow | null = null
+let win
 
 const url = 'http://127.0.0.1:5173'
 const preload = join(__dirname, '../preload/index.js')
@@ -36,7 +38,7 @@ const createWindow = async () => {
     backgroundColor: '#0F0F0F',
     webPreferences: {
       preload,
-      nodeIntegration: true,
+      nodeIntegration: false,
       contextIsolation: true
     }
   })
@@ -47,7 +49,7 @@ const createWindow = async () => {
     win.loadURL(url)
   }
 
-  win.once('ready-to-show', () => win?.show())
+  win.once('ready-to-show', () => win.show())
   win.webContents.openDevTools()
 }
 
@@ -71,13 +73,11 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
 })
 
-ipcMain.on('close-app', () => win?.close())
+ipcMain.on('close-app', () => win.close())
 
-ipcMain.on('min-app', () => win?.minimize())
+ipcMain.on('min-app', () => win.minimize())
 
 ipcMain.handle('scale-app', () => {
-  win?.setOpacity(0)
-  win?.setContentSize(1336, 768)
-  win?.center()
-  win?.setOpacity(1)
+  win.setContentSize(1336, 768)
+  win.center()
 })
