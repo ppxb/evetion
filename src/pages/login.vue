@@ -46,6 +46,7 @@
               placeholder="密码"
               class="flex px-3 py-2 rounded-lg font-medium placeholder:font-normal text-gray-800 bg-neutral-100"
               v-model="loginForm.password"
+              @keyup.enter="login"
             />
             <button
               class="flex items-center justify-center text-md px-4 py-3 rounded-lg font-bold bg-[#ffe85c] hover:bg-[#ffe32d] transition-all ease-in text-gray-800"
