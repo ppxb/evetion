@@ -14,7 +14,7 @@
         <div class="font-bold text-md">{{ store.user.name }}</div>
         <div class="text-sm text-gray-800">{{ store.user.dept }}</div>
       </div>
-      <app-icon name="icon-logout" @click="logout" class="mr-2 ml-0" />
+      <app-icon name="icon-logout" @click="logout" class="mr-2" />
     </div>
   </div>
 </template>
