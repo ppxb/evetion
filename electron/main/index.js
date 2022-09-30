@@ -81,7 +81,10 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
 })
 
-ipcMain.on('close-app', () => win.close())
+ipcMain.on('close-app', () => {
+  win.webContents.session.clearStorageData()
+  app.quit()
+})
 
 ipcMain.on('min-app', () => win.minimize())
 

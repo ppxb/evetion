@@ -1,6 +1,6 @@
 <template>
   <div class="flex h-screen">
-    <div class="flex flex-col w-full pb-12 pt-20 px-12">
+    <div class="flex flex-col w-full pb-12 pt-24 px-12">
       <div class="text-3xl font-bold text-gray-800 mb-1">可使用的服务</div>
       <div class="text-medium font-bold text-gray-600 mb-6">
         如需开通更多服务，请联系管理员赋权
@@ -21,6 +21,14 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue'
+import useUserStore from '../store/userStore'
+
+onMounted(async () => {
+  const store = useUserStore()
+  store.getUserInfo()
+})
+
 const serviceList = [
   {
     id: 1,

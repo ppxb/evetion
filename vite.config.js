@@ -38,5 +38,14 @@ export default defineConfig({
       iconDirs: [resolve(process.cwd(), 'src/icons')],
       symbolId: 'icon-[name]'
     })
-  ]
+  ],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8888/api',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/api/, '')
+      }
+    }
+  }
 })
