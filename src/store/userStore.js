@@ -13,6 +13,7 @@ const useUserStore = defineStore('user', () => {
   const userLogout = async () => {
     user.value = {}
     localStorage.removeItem('token')
+    if (window.ipc) window.ipc.resetWindow()
   }
 
   return {

@@ -1,5 +1,5 @@
 <template>
-  <svg aria-hidden="true" class="svg-icon">
+  <svg aria-hidden="true" :class="iconType" :style="iconColor">
     <use :xlink:href="symbolId" />
   </svg>
 </template>
@@ -11,10 +11,28 @@ const props = defineProps({
   name: {
     type: String,
     required: true
+  },
+  type: {
+    type: String,
+    default: 'icon'
+  },
+  color: {
+    type: String
   }
 })
 
 const symbolId = computed(() => `#${props.name}`)
+const iconType = computed(() => {
+  switch (props.type) {
+    case 'icon':
+      return 'svg-icon'
+    case 'logo':
+      return 'svg-logo'
+    default:
+      return 'svg-menu'
+  }
+})
+const iconColor = computed(() => `color:${props.color}`)
 </script>
 <style>
 .svg-icon {
@@ -32,5 +50,19 @@ const symbolId = computed(() => `#${props.name}`)
 .svg-icon:hover {
   background-color: rgba(0, 0, 0, 0.1);
   cursor: pointer;
+}
+
+.svg-logo {
+  width: 2.5rem;
+  height: 2.5rem;
+  -webkit-app-region: no-drag;
+  color: #333;
+  margin-right: 1rem;
+}
+
+.svg-menu {
+  width: 1.5rem;
+  height: 1.5rem;
+  -webkit-app-region: no-drag;
 }
 </style>

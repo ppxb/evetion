@@ -26,14 +26,13 @@ body {
   font-family: 'Poppins', 'SF Pro SC', sans-serif;
   margin: 0;
   padding: 0;
-  -webkit-app-region: drag;
-}
-
-button,
-input {
   -webkit-app-region: no-drag;
 }
 
 img {
   -webkit-user-drag: none;
+}
+
+input[type='password']::-ms-reveal {
+  display: none;
 }

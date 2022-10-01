@@ -2,11 +2,10 @@
   <div class="flex h-screen">
     <div class="flex flex-row w-full">
       <div
-        class="flex flex-col flex-auto justify-between bg-[#ffe85c] pb-8 pt-12 px-8 text-gray-800"
+        class="flex flex-col flex-auto justify-between bg-[#E7F6DF] pb-8 pt-12 px-8 text-gray-800"
       >
         <div class="flex items-center justify-start space-x-3">
-          <span class="bg-gray-800 rounded w-8 h-8"></span>
-          <div class="font-extrabold text-2xl">Evetion</div>
+          <app-icon name="icon-logo" type="logo" />
         </div>
         <div>
           <h1 class="text-4xl font-semibold">体验全新的智慧化工作流</h1>
@@ -17,8 +16,8 @@
         </div>
         <div class="font-medium text-sm">
           <div class="flex flex-row items-center">
-            <div>Ver.{{ version }}</div>
-            <div class="ml-2 px-1 bg-gray-900 rounded-md text-white">
+            <div>Version {{ version }}</div>
+            <div class="ml-2 px-1 bg-[rgba(0,0,0,.7)] rounded-md text-white">
               latest
             </div>
           </div>
@@ -49,7 +48,7 @@
               @keyup.enter="login"
             />
             <button
-              class="flex items-center justify-center text-md px-4 py-3 rounded-lg font-bold bg-[#ffe85c] hover:bg-[#ffe32d] transition-all ease-in text-gray-800"
+              class="flex items-center justify-center text-md px-4 py-3 rounded-lg font-bold bg-[#E7F6DF] hover:bg-[#BAE6A7] transition-all ease-in text-gray-800"
               @click="login"
             >
               点击登录
@@ -72,18 +71,16 @@ import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import api from '../api'
 
+const router = useRouter()
 const loginForm = reactive({
   username: '',
   password: ''
 })
-const version = ref('20220930')
-
-const router = useRouter()
+const version = ref('Alpha 1.0.0')
 
 const login = async () => {
   if (loginForm.username == '' || loginForm.password == '') return
   const res = await api.login(loginForm)
-
-  if (res.code === 200) router.push('/serviceList')
+  if (res.code === 200) router.push('/dashboard')
 }
 </script>

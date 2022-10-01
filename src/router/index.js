@@ -1,9 +1,8 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
-  { path: '/', redirect: '/serviceList' },
+  { path: '/', redirect: '/dashboard' },
   { path: '/login', component: () => import('../pages/login.vue') },
-  { path: '/serviceList', component: () => import('../pages/serviceList.vue') },
   { path: '/dashboard', component: () => import('../pages/dashboard.vue') }
 ]
 
