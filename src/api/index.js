@@ -1,7 +1,9 @@
 import userApi from './user'
+import projectApi from './project'
 
 const api = {
-  ...userApi
+  ...userApi,
+  ...projectApi
 }
 
 export default api

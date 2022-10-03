@@ -37,28 +37,28 @@
             </template>
             <n-form :model="modelRef" :rules="rules" ref="formRef">
               <n-form-item label="项目编号" :label-style="{ fontSize: '1rem' }">
-                <n-input v-model:value="modelRef.id" disabled />
+                <n-input v-model:value="modelRef.projectId" disabled />
               </n-form-item>
               <n-form-item
                 label="项目名称"
                 :label-style="{ fontSize: '1rem' }"
-                path="name"
+                path="projectName"
               >
-                <n-input v-model:value="modelRef.name" />
+                <n-input v-model:value="modelRef.projectName" />
               </n-form-item>
               <n-form-item
                 label="项目金额"
                 :label-style="{ fontSize: '1rem' }"
-                path="money"
+                path="projectMoney"
               >
-                <n-input v-model:value="modelRef.money" />
+                <n-input v-model:value="modelRef.projectMoney" />
               </n-form-item>
               <n-form-item
                 label="项目负责人"
                 :label-style="{ fontSize: '1rem' }"
-                path="owner"
+                path="projectOwner"
               >
-                <n-input v-model:value="modelRef.owner" />
+                <n-input v-model:value="modelRef.projectOwner" />
               </n-form-item>
             </n-form>
             <template #footer>
@@ -81,35 +81,43 @@
         </n-modal>
       </div>
       <div class="flex flex-col justify-center items-center h-full">
-        <div class="font-bold text-lg text-gray-500">没有正在管理的项目</div>
+        <div v-if="projects.length > 0">
+          {{ projects.length }}
+        </div>
+        <div class="font-bold text-lg text-gray-500" v-else>
+          没有正在管理的项目
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { NModal, NCard, NForm, NFormItem, NInput, NInputNumber } from 'naive-ui'
+import { NModal, NCard, NForm, NFormItem, NInput, useMessage } from 'naive-ui'
 import { nanoid } from 'nanoid'
+import api from '../api'
 
 const route = useRoute()
+const { success, error } = useMessage()
+const projects = ref([])
 const showAddModal = ref(false)
 const formRef = ref(null)
 const modelRef = ref({
-  id: null,
-  name: null,
-  money: null,
-  owner: null
+  projectId: null,
+  projectName: null,
+  projectMoney: null,
+  projectOwner: null
 })
 const rules = {
-  name: [
+  projectName: [
     {
       required: true,
       message: '请输入项目名称'
     }
   ],
-  money: [
+  projectMoney: [
     {
       required: true,
       validator: (_, value) => {
@@ -119,7 +127,7 @@ const rules = {
       }
     }
   ],
-  owner: [
+  projectOwner: [
     {
       required: true,
       message: '请输入项目负责人'
@@ -127,16 +135,39 @@ const rules = {
   ]
 }
 
+onMounted(() => {
+  fetchProjects()
+})
+
+const fetchProjects = async () => {
+  const res = await api.getProjects()
+  projects.value = res.data
+}
+
 const openModal = () => {
   showAddModal.value = !showAddModal.value
-  if (!modelRef.value.id && showAddModal.value === true)
-    modelRef.value.id = nanoid()
-  else modelRef.value.id = null
+  if (!modelRef.value.projectId && showAddModal.value === true)
+    modelRef.value.projectId = `JKSY-XM-${nanoid(10)}`
+  else modelRef.value.projectId = null
 }
 
 const submit = () => {
-  formRef.value.validate(errors => {
-    if (!errors) console.log('go')
+  formRef.value.validate(async errors => {
+    if (!errors) {
+      modelRef.value.projectMoney = parseInt(modelRef.value.projectMoney)
+      const res = await api.newProject(modelRef.value)
+      console.log(res)
+      if (res.code == 200) {
+        success(res.message)
+        openModal()
+        for (const [key, _] of Object.entries(modelRef.value)) {
+          modelRef.value[key] = null
+        }
+        fetchProjects()
+      } else {
+        error(res.message)
+      }
+    }
   })
 }
 </script>
