@@ -4,28 +4,24 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  font-size: 16px;
-  line-height: 24px;
-
-  user-select: none;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
 :focus-visible {
   outline: none;
 }
 
 html,
 body {
+  font-size: 16px;
+  line-height: 24px;
+  user-select: none;
   font-family: 'Poppins', 'SF Pro SC', sans-serif;
   margin: 0;
   padding: 0;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
   -webkit-app-region: no-drag;
 }
 

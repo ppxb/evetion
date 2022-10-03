@@ -25,11 +25,6 @@ http.interceptors.request.use(
 http.interceptors.response.use(
   response => {
     const res = response.data
-
-    if (res.code != 200) {
-      console.warn(res.message)
-    }
-
     const { token } = res.data
 
     if (token) {
@@ -39,7 +34,6 @@ http.interceptors.response.use(
     return res
   },
   error => {
-    console.warn(error)
     return Promise.reject(error)
   }
 )
