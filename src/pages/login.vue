@@ -70,7 +70,9 @@
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import api from '../api'
+import useUserStore from '../store/userStore'
 
+const store = useUserStore()
 const router = useRouter()
 const loginForm = reactive({
   username: '',
@@ -81,6 +83,9 @@ const version = ref('Alpha 1.0.0')
 const login = async () => {
   if (loginForm.username == '' || loginForm.password == '') return
   const res = await api.login(loginForm)
-  if (res.code === 200) router.push('/dashboard')
+  if (res.code === 200) {
+    store.user = res.data.user
+    router.push('/dashboard')
+  }
 }
 </script>

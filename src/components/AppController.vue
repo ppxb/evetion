@@ -15,22 +15,23 @@
           <div class="text-gray-800">资产管理系统</div>
         </div>
         <div class="flex flex-row">
-          <div
+          <router-link
             v-for="menu in menus"
             :key="menu.path"
-            class="flex flex-row items-center mr-16 menu px-4 rounded-xl"
+            class="flex flex-row items-center mr-4 menu px-6 rounded-xl"
+            :to="menu.path"
           >
             <app-icon
               :name="menu.icon"
               type="menu"
-              class="mr-2"
+              class="mr-3"
               color="#6E8B81"
               hoverColor="#1D4344"
             />
             <div class="text-[#6E8B81] font-semibold">
               {{ menu.name }}
             </div>
-          </div>
+          </router-link>
         </div>
       </div>
       <div class="user rounded-lg bg-white text-gray-900 w-fit" v-if="showUser">
@@ -62,9 +63,9 @@ const showUser = ref(false)
 const showTitle = ref(false)
 
 const menus = [
-  { name: 'Dashboard', path: '/dashboard', icon: 'icon-dashboard' },
-  { name: '资产', path: '/asset', icon: 'icon-asset' },
-  { name: '项目', path: '/project', icon: 'icon-project' }
+  { name: '看板', path: '/dashboard', icon: 'icon-dashboard' },
+  { name: '资产', path: '/assets', icon: 'icon-asset' },
+  { name: '项目', path: '/projects', icon: 'icon-project' }
 ]
 
 watchEffect(() => {
