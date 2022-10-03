@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
-import { createPinia } from 'pinia'
 
 import router from './router'
+import store from './store'
 import App from './App.vue'
 
 import AppIcon from './components/AppIcon.vue'
@@ -10,10 +10,9 @@ import 'virtual:svg-icons-register'
 import './global.css'
 
 const app = createApp(App)
-const pinia = createPinia()
 
 app.use(router)
-app.use(pinia)
+app.use(store)
 
 app.component('app-icon', AppIcon)
 

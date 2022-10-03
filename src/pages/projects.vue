@@ -10,7 +10,7 @@
         }}
       </div>
       <div class="mb-1 flex justify-between items-end">
-        <div class="text-6xl font-bold text-[#090046]">项目列表</div>
+        <div class="text-6xl font-bold text-[#090046]">项目面板</div>
         <button
           class="bg-[#EAE8FF] rounded-xl px-6 py-3 text-[#090046] font-bold add"
           @click="openModal"
@@ -53,6 +53,13 @@
               >
                 <n-input v-model:value="modelRef.projectMoney" />
               </n-form-item>
+              <n-form-item label="项目持续时间">
+                <n-date-picker
+                  v-model:value="timeRangeRef"
+                  type="daterange"
+                  clearable
+                />
+              </n-form-item>
               <n-form-item
                 label="项目负责人"
                 :label-style="{ fontSize: '1rem' }"
@@ -85,7 +92,7 @@
           {{ projects.length }}
         </div>
         <div class="font-bold text-lg text-gray-500" v-else>
-          没有正在管理的项目
+          没有正在进行的项目
         </div>
       </div>
     </div>
@@ -95,8 +102,17 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { NModal, NCard, NForm, NFormItem, NInput, useMessage } from 'naive-ui'
+import {
+  NModal,
+  NCard,
+  NForm,
+  NFormItem,
+  NInput,
+  NDatePicker,
+  useMessage
+} from 'naive-ui'
 import { nanoid } from 'nanoid'
+import { toRFC3339 } from '../utils'
 import api from '../api'
 
 const route = useRoute()
@@ -104,11 +120,14 @@ const { success, error } = useMessage()
 const projects = ref([])
 const showAddModal = ref(false)
 const formRef = ref(null)
+const timeRangeRef = ref(null)
 const modelRef = ref({
   projectId: null,
   projectName: null,
   projectMoney: null,
-  projectOwner: null
+  projectOwner: null,
+  projectStartDate: null,
+  projectEndDate: null
 })
 const rules = {
   projectName: [
@@ -154,9 +173,15 @@ const openModal = () => {
 const submit = () => {
   formRef.value.validate(async errors => {
     if (!errors) {
-      modelRef.value.projectMoney = parseInt(modelRef.value.projectMoney)
-      const res = await api.newProject(modelRef.value)
-      console.log(res)
+      const parsedMoney = parseInt(modelRef.value.projectMoney)
+      if (timeRangeRef.value) {
+        modelRef.value.projectStartDate = toRFC3339(timeRangeRef.value[0])
+        modelRef.value.projectEndDate = toRFC3339(timeRangeRef.value[1])
+      }
+      const res = await api.newProject({
+        ...modelRef.value,
+        projectMoney: parsedMoney
+      })
       if (res.code == 200) {
         success(res.message)
         openModal()
