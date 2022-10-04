@@ -22,7 +22,7 @@
 
       <!-- short active link -->
       <div class="text-[#090046]">
-        {{ route.name }} /
+        {{ route.name }} / {{ currentAssetType.i }}
         <span class="font-bold text-[rgba(0,0,0,.5)]">
           {{ currentAssetType.name }} 「{{
             currentAssetType.type == 'common' ? '通用' : '项目'
@@ -156,8 +156,9 @@ const { success, error } = useMessage()
 
 const showUploadModal = ref(false)
 const currentAssetType = ref({
-  name: '🗂️ 全部',
-  type: 'common'
+  name: '全部',
+  type: 'common',
+  i: '🗂️ '
 })
 
 const projects = ref([])
@@ -266,20 +267,23 @@ const commonMenuOptions = [
     children: [
       {
         label: () => h('div', '🗂️ 全部'),
-        name: '🗂️ 全部',
+        name: '全部',
         key: '全部',
+        i: '🗂️ ',
         type: 'common'
       },
       {
         label: () => h('div', '💻 办公资产'),
-        name: '💻 办公资产',
+        name: '办公资产',
         key: '办公资产',
+        i: '💻 ',
         type: 'common'
       },
       {
         label: () => h('div', '🛠️ 其他资产'),
-        name: '🛠️ 其他资产',
+        name: '其他资产',
         key: '其他资产',
+        i: '🛠️ ',
         type: 'common'
       }
     ]
@@ -299,13 +303,15 @@ const commonMenuOptions = [
       {
         label: '📁 东安湖大运村智慧城市示范项目',
         key: '东安湖大运村智慧城市示范项目',
-        name: '📁 东安湖大运村智慧城市示范项目',
+        name: '东安湖大运村智慧城市示范项目',
+        i: '📁 ',
         type: 'project'
       },
       {
         label: '📁 龙泉驿区智慧城市二期机房扩容项目',
         key: '龙泉驿区智慧城市二期机房扩容项目',
-        name: '📁 龙泉驿区智慧城市二期机房扩容项目',
+        name: '龙泉驿区智慧城市二期机房扩容项目',
+        i: '📁 ',
         type: 'project'
       }
     ]
@@ -315,7 +321,8 @@ const commonMenuOptions = [
 const handleMenuChange = (key, item) => {
   currentAssetType.value = {
     name: item.name,
-    type: item.type
+    type: item.type,
+    i: item.i
   }
 }
 </script>
