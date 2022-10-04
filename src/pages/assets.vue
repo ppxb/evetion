@@ -35,6 +35,7 @@
           <div class="flex items-center justify-between">
             <div class="text-2xl font-bold text-[#090046]">资产分类</div>
             <button
+              v-if="store.user.username === 'admin'"
               class="flex items-center bg-[#e7e6fa] backdrop-blur rounded-xl px-4 py-2 text-[#090046] font-bold add"
             >
               <app-icon name="icon-add" type="menu" class="mr-3" />
@@ -150,8 +151,10 @@ import {
 import { nanoid } from 'nanoid'
 import { toRFC3339 } from '../utils'
 import api from '../api'
+import useUserStore from '../store/userStore'
 
 const route = useRoute()
+const store = useUserStore()
 const { success, error } = useMessage()
 
 const showUploadModal = ref(false)
