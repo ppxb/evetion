@@ -38,7 +38,7 @@
               class="flex items-center bg-[#e7e6fa] backdrop-blur rounded-xl px-4 py-2 text-[#090046] font-bold add"
             >
               <app-icon name="icon-add" type="menu" class="mr-3" />
-              新建分类
+              新建子目
             </button>
           </div>
           <n-menu
