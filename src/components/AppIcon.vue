@@ -13,8 +13,7 @@ const props = defineProps({
     required: true
   },
   type: {
-    type: String,
-    default: 'icon'
+    type: String
   },
   color: {
     type: String

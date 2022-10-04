@@ -1,9 +1,9 @@
 <template>
   <div :class="['app-controller']">
     <div class="controller mb-4">
-      <app-icon name="icon-setting" @click="openSetting" />
-      <app-icon name="icon-mins" @click="minApp" />
-      <app-icon name="icon-close" @click="closeApp" />
+      <app-icon name="icon-setting" type="icon" @click="openSetting" />
+      <app-icon name="icon-mins" type="icon" @click="minApp" />
+      <app-icon name="icon-close" type="icon" @click="closeApp" />
     </div>
     <div class="flex flex-row w-full place-content-between items-enter">
       <div class="flex flex-row" v-if="showTitle">
@@ -44,7 +44,7 @@
           <div class="font-bold text-md text-[#333]">{{ store.user.name }}</div>
           <div class="text-sm text-gray-800">{{ store.user.dept }}</div>
         </div>
-        <app-icon name="icon-logout" @click="logout" class="mr-2" />
+        <app-icon name="icon-logout" @click="logout" class="mr-2" type="icon" />
       </div>
     </div>
   </div>
@@ -64,8 +64,7 @@ const showTitle = ref(false)
 
 const menus = [
   { name: '看板', path: '/dashboard', icon: 'icon-dashboard' },
-  { name: '资产', path: '/assets', icon: 'icon-asset' },
-  { name: '项目', path: '/projects', icon: 'icon-project' }
+  { name: '资产', path: '/assets', icon: 'icon-asset' }
 ]
 
 watchEffect(() => {

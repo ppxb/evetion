@@ -4,8 +4,11 @@ const routes = [
   { path: '/', redirect: '/dashboard' },
   { path: '/login', component: () => import('../pages/login.vue') },
   { path: '/dashboard', component: () => import('../pages/dashboard.vue') },
-  { path: '/assets', component: () => import('../pages/assets.vue') },
-  { path: '/projects', component: () => import('../pages/projects.vue') }
+  {
+    path: '/assets',
+    name: '资产',
+    component: () => import('../pages/assets.vue')
+  }
 ]
 
 const router = createRouter({

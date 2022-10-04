@@ -25,6 +25,10 @@ body {
   -webkit-app-region: no-drag;
 }
 
+::-webkit-scrollbar {
+  width: 0;
+}
+
 img {
   -webkit-user-drag: none;
 }
