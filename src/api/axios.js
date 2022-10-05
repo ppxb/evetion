@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const http = axios.create({
-  timeout: 60 * 1000,
+  timeout: 5 * 1000,
   withCredentials: true
 })
 
@@ -17,7 +17,6 @@ http.interceptors.request.use(
     return config
   },
   error => {
-    console.warn(error)
     return Promise.reject(error)
   }
 )
