@@ -277,7 +277,6 @@
                 render-as="svg"
                 foreground="#818cf8"
                 level="H"
-                class="rounded-lg"
               />
             </div>
           </n-gi>
