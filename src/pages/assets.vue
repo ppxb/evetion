@@ -51,13 +51,22 @@
           />
         </div>
 
-        <div class="flex w-3/4 items-center justify-center">
-          <div v-if="projects.length > 0">
-            {{ projects.length }}
+        <div class="flex flex-col w-3/4 ml-20">
+          <div class="flex justify-between items-center mb-6">
+            <div class="text-2xl font-bold text-[#090046]">资产列表</div>
+            <div class="flex flex-col items-end">
+              <div class="text-sm">资产数量总计</div>
+              <div class="font-semibold text-[#090046]">
+                {{ assets.length }}
+              </div>
+            </div>
           </div>
-          <div v-else class="font-bold text-lg text-[rgba(0,0,0,.3)]">
-            没有正在管理的资产
-          </div>
+          <n-data-table
+            :columns="columns"
+            :data="assets"
+            :pagination="{ pageSize: 10 }"
+            :bordered="false"
+          />
         </div>
       </div>
     </div>
@@ -85,7 +94,7 @@
         <app-icon name="icon-close" type="icon" @click="openAddSingleModal" />
       </template>
 
-      <n-form :model="singleRef" :rules="rules" ref="formRef">
+      <n-form :model="singleRef" :rules="singleRules" ref="singleFormRef">
         <n-grid :cols="24">
           <n-gi :span="14">
             <n-grid :cols="14" :x-gap="12">
@@ -107,34 +116,39 @@
                   :options="assetChildTypeOptions"
                 />
               </n-form-item-gi>
-              <n-form-item-gi :span="8" label="所属项目名称" v-else>
+              <n-form-item-gi
+                :span="8"
+                label="所属项目名称"
+                v-else
+                path="assetProjectName"
+              >
                 <n-input
                   v-model:value="singleRef.assetProjectName"
-                  placeholder="请输入项目名称"
+                  placeholder="请输入资产所属项目名称"
                 />
               </n-form-item-gi>
 
-              <n-form-item-gi :span="14" label="资产名称">
+              <n-form-item-gi :span="14" label="资产名称" path="assetName">
                 <n-input
                   v-model:value="singleRef.assetName"
                   placeholder="请输入资产的名称"
                 />
               </n-form-item-gi>
 
-              <n-form-item-gi :span="6" label="资产编号">
+              <n-form-item-gi :span="6" label="资产编号" path="assetId">
                 <n-input
                   v-model:value="singleRef.assetId"
                   placeholder="请输入资产对应的编号"
                 />
               </n-form-item-gi>
-              <n-form-item-gi :span="8" label="型号规格">
+              <n-form-item-gi :span="8" label="型号规格" path="assetModel">
                 <n-input
                   v-model:value="singleRef.assetModel"
                   placeholder="请输入资产对应的型号规格（如品牌、尺寸等）"
                 />
               </n-form-item-gi>
 
-              <n-form-item-gi :span="4" label="单位">
+              <n-form-item-gi :span="4" label="单位" path="assetUnit">
                 <n-select
                   v-model:value="singleRef.assetUnit"
                   placeholder="请选择单位"
@@ -156,13 +170,13 @@
                 />
               </n-form-item-gi>
 
-              <n-form-item-gi :span="3" label="数量">
+              <n-form-item-gi :span="4" label="数量" path="assetCount">
                 <n-input-number
                   v-model:value="singleRef.assetCount"
-                  placeholder="请输入资产数量"
+                  placeholder="请输入数量"
                 />
               </n-form-item-gi>
-              <n-form-item-gi :span="5" label="资产价值">
+              <n-form-item-gi :span="5" label="资产价值" path="assetValue">
                 <n-input-number
                   v-model:value="singleRef.assetValue"
                   placeholder="请输入资产价值"
@@ -170,17 +184,21 @@
                   <template #suffix> 元 </template>
                 </n-input-number>
               </n-form-item-gi>
-              <n-form-item-gi :span="6" label="折旧策略">
+              <n-form-item-gi
+                :span="5"
+                label="折旧年限"
+                path="assetDepreciation"
+              >
                 <n-input-number
                   v-model:value="singleRef.assetDepreciation"
-                  placeholder="请输入折旧年限"
+                  placeholder="请输入年限"
                   class="w-full"
                 >
                   <template #suffix> 年 </template>
                 </n-input-number>
               </n-form-item-gi>
 
-              <n-form-item-gi :span="7" label="入库日期">
+              <n-form-item-gi :span="7" label="入库日期" path="assetInDate">
                 <n-date-picker
                   v-model:value="singleRef.assetInDate"
                   type="date"
@@ -195,7 +213,11 @@
                 />
               </n-form-item-gi>
 
-              <n-form-item-gi :span="14" label="资产存放位置信息">
+              <n-form-item-gi
+                :span="14"
+                label="资产存放位置信息"
+                path="assetLocation"
+              >
                 <n-input
                   v-model:value="singleRef.assetLocation"
                   placeholder="请输入资产存放位置信息"
@@ -287,13 +309,13 @@
         <div class="flex flex-row justify-end">
           <button
             class="bg-red-400 rounded-xl px-8 py-2 text-white font-bold mr-4"
-            @click="openModal"
+            @click="openAddSingleModal"
           >
             取消
           </button>
           <button
             class="bg-[#EAE8FF] rounded-xl px-8 py-2 text-[#090046] font-bold add"
-            @click="submit"
+            @click="submitAddSingle"
           >
             确定
           </button>
@@ -390,7 +412,8 @@ import {
   NFormItemGi,
   NSelect,
   NInputNumber,
-  NGi
+  NGi,
+  NDataTable
 } from 'naive-ui'
 import { nanoid } from 'nanoid'
 import QrcodeVue from 'qrcode.vue'
@@ -402,7 +425,101 @@ const route = useRoute()
 const store = useUserStore()
 const { success, error } = useMessage()
 
+const assets = ref([])
+
+const columns = [
+  { title: 'ID', key: 'ID' },
+  { title: '资产分类', key: 'assetType' },
+  { title: '资产编号', key: 'assetId' },
+  { title: '资产名称', key: 'assetName' },
+  { title: '资产价值', key: 'assetValue' },
+  { title: '资产状态', key: 'assetStatus' }
+]
+
+// add single asset ref
 const showAddSingleModal = ref(false)
+const singleFormRef = ref(null)
+const singleRef = ref({
+  assetType: '通用',
+  assetChildType: '办公资产',
+  assetName: null,
+  assetProjectName: null,
+  assetId: null,
+  assetModel: null,
+  assetUnit: null,
+  assetOrigin: '购入',
+  assetStatus: '正常',
+  assetInDate: null,
+  assetOpDate: null,
+  assetCount: null,
+  assetValue: null,
+  assetDepreciation: null,
+  assetLocation: ''
+})
+const singleRules = {
+  assetProjectName: [
+    {
+      required: true,
+      message: '请输入资产归属项目名称'
+    }
+  ],
+  assetName: [
+    {
+      required: true,
+      message: '请输入资产名称'
+    }
+  ],
+  assetId: [
+    {
+      required: true,
+      message: '请输入资产编号'
+    }
+  ],
+  assetModel: [
+    {
+      required: true,
+      message: '请输入资产的型号或规格'
+    }
+  ],
+  assetUnit: [
+    {
+      required: true,
+      message: '请选择适合的单位'
+    }
+  ],
+  assetInDate: [
+    {
+      required: true,
+      message: '请选择资产的入库日期'
+    }
+  ],
+  assetLocation: [
+    {
+      required: true,
+      message: '请输入资产存放位置信息'
+    }
+  ],
+  assetCount: [
+    {
+      required: true,
+      validator: (_, value) => {
+        if (!value) return new Error('请输入资产数量')
+        else if (!/^\d*$/.test(value)) return new Error('资产数量应该为整数')
+        else if (Number(value) <= 0) return new Error('资产数量应该大于0')
+        return true
+      }
+    }
+  ],
+  assetDepreciation: [
+    {
+      validator: (_, value) => {
+        if (!/^\d*$/.test(value)) return new Error('资产数量应该为整数')
+        else if (Number(value) <= 0) return new Error('折旧年限应该大于0')
+        return true
+      }
+    }
+  ]
+}
 
 const showUploadModal = ref(false)
 const currentAssetType = ref({
@@ -415,24 +532,6 @@ const projects = ref([])
 const showAddModal = ref(false)
 const formRef = ref(null)
 const timeRangeRef = ref(null)
-
-const singleRef = ref({
-  assetType: '通用',
-  assetChildType: '办公资产',
-  assetName: '',
-  assetProjectName: '',
-  assetId: '',
-  assetModel: '',
-  assetUnit: null,
-  assetOrigin: '购入',
-  assetStatus: '正常',
-  assetInDate: null,
-  assetOpDate: null,
-  assetCount: 0,
-  assetValue: null,
-  assetDepreciation: null,
-  assetLocation: ''
-})
 
 const assetTypeOptions = ['通用', '项目'].map(v => ({
   label: v,
@@ -468,6 +567,10 @@ const modelRef = ref({
   projectOwner: null,
   projectStartDate: null,
   projectEndDate: null
+})
+
+onMounted(() => {
+  fetchAssets()
 })
 
 const openUploadModal = () => {
@@ -511,13 +614,15 @@ const rules = {
   ]
 }
 
-onMounted(() => {
-  fetchProjects()
-})
-
 const fetchProjects = async () => {
   const res = await api.getProjects()
   projects.value = res.data
+}
+
+const fetchAssets = async () => {
+  const res = await api.getAllAssets()
+  if (res.code == 200) assets.value = res.data
+  else error(res.message)
 }
 
 const openModal = () => {
@@ -527,25 +632,41 @@ const openModal = () => {
   else modelRef.value.projectId = null
 }
 
-const submit = () => {
-  formRef.value.validate(async errors => {
+const submitAddSingle = async () => {
+  singleFormRef.value.validate(async errors => {
     if (!errors) {
-      const parsedMoney = parseInt(modelRef.value.projectMoney)
-      if (timeRangeRef.value) {
-        modelRef.value.projectStartDate = toRFC3339(timeRangeRef.value[0])
-        modelRef.value.projectEndDate = toRFC3339(timeRangeRef.value[1])
+      const injectObj = {
+        assetValue: parseFloat(singleRef.value.assetValue),
+        assetCount: parseInt(singleRef.value.assetCount),
+        assetDepreciation: parseFloat(singleRef.value.assetDepreciation),
+        assetInDate: toRFC3339(singleRef.value.assetInDate),
+        assetOpDate: toRFC3339(singleRef.value.assetOpDate)
       }
-      const res = await api.newProject({
-        ...modelRef.value,
-        projectMoney: parsedMoney
+      const res = await api.newAsset({
+        ...singleRef.value,
+        ...injectObj
       })
       if (res.code == 200) {
+        openAddSingleModal()
         success(res.message)
-        openModal()
-        for (const [key, _] of Object.entries(modelRef.value)) {
-          modelRef.value[key] = null
+        for (const [key, _] of Object.entries(singleRef.value)) {
+          if (
+            [
+              'assetType',
+              'assetChildType',
+              'assetOrigin',
+              'assetStatus'
+            ].includes(key)
+          ) {
+            singleRef.value['assetType'] = '通用'
+            singleRef.value['assetChildType'] = '办公资产'
+            singleRef.value['assetOrigin'] = '购入'
+            singleRef.value['assetStatus'] = '正常'
+          } else {
+            singleRef.value[key] = null
+          }
         }
-        fetchProjects()
+        fetchAssets()
       } else {
         error(res.message)
       }
