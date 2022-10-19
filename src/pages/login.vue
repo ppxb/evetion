@@ -14,13 +14,13 @@
         </p>
       </div>
       <div class="font-medium text-sm">
+        <div>2022 © Built by ppxb</div>
         <div class="flex flex-row items-center">
           <div class="mr-2">VER {{ version }}</div>
           <div class="px-1 bg-[rgba(0,0,0,.8)] rounded-md text-white text-xs">
             LATEST
           </div>
         </div>
-        <div>2022 © Built by ppxb</div>
       </div>
     </div>
 
