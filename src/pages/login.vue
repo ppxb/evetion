@@ -10,14 +10,14 @@
         <h1 class="text-4xl font-semibold">体验全新的智慧化工作流</h1>
         <p class="text-lg">
           该项目作为
-          <span class="font-semibold">Evetion LTS</span> 版本提供技术支持
+          <span class="font-semibold">Fiber LTS</span> 版本提供技术支持
         </p>
       </div>
       <div class="font-medium text-sm">
         <div class="flex flex-row items-center">
-          <div>Version {{ version }}</div>
-          <div class="ml-2 px-1 bg-[rgba(0,0,0,.7)] rounded-md text-white">
-            latest
+          <div class="mr-2">VER {{ version }}</div>
+          <div class="px-1 bg-[rgba(0,0,0,.8)] rounded-md text-white text-xs">
+            LATEST
           </div>
         </div>
         <div>2022 © Built by ppxb</div>
@@ -30,7 +30,7 @@
       <div class="flex flex-1 flex-col justify-center space-y-5 w-full">
         <div class="flex flex-col space-y-2">
           <h2 class="text-3xl font-bold mb-1">👏 欢迎回来</h2>
-          <p class="text-md">账号已实现 SSO ，支持 Evetion 全系统登录</p>
+          <p class="text-md">账号已实现 SSO ，支持 Fiber 全系统登录</p>
         </div>
         <div class="flex flex-col max-w-md space-y-5">
           <input
@@ -59,7 +59,7 @@
       <div
         class="flex justify-center flex-col m-auto mb-8 text-center text-medium dark:text-gray-200"
       >
-        <p>Contact me if you have any good ideas.</p>
+        💪 如果你有新点子请联系我
       </div>
     </div>
   </div>
@@ -80,7 +80,7 @@ const loginForm = reactive({
   password: ''
 })
 const logining = ref(false)
-const version = ref('Alpha 1.0.0')
+const version = ref('1.0.0.SNAPSHOT')
 
 const login = async () => {
   logining.value = true
