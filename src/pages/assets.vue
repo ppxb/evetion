@@ -148,7 +148,7 @@
                 />
               </n-form-item-gi>
 
-              <n-form-item-gi :span="4" label="单位" path="assetUnit">
+              <n-form-item-gi :span="4" label="计量单位" path="assetUnit">
                 <n-select
                   v-model:value="singleRef.assetUnit"
                   placeholder="请选择单位"
@@ -162,6 +162,7 @@
                   :options="assetOriginOptions"
                 />
               </n-form-item-gi>
+              <!-- default status is not neccesary -->
               <n-form-item-gi :span="6" label="资产状态">
                 <n-select
                   v-model:value="singleRef.assetStatus"
@@ -170,6 +171,7 @@
                 />
               </n-form-item-gi>
 
+              <!-- if multi assets import should auto generate count-times asset id and attach to asset -->
               <n-form-item-gi :span="4" label="数量" path="assetCount">
                 <n-input-number
                   v-model:value="singleRef.assetCount"
@@ -213,14 +215,10 @@
                 />
               </n-form-item-gi>
 
-              <n-form-item-gi
-                :span="14"
-                label="资产存放位置信息"
-                path="assetLocation"
-              >
+              <n-form-item-gi :span="14" label="存放地点" path="assetLocation">
                 <n-input
                   v-model:value="singleRef.assetLocation"
-                  placeholder="请输入资产存放位置信息"
+                  placeholder="请输入资产存放存放地点信息"
                 />
               </n-form-item-gi>
             </n-grid>
@@ -520,6 +518,7 @@ const singleRules = {
     }
   ]
 }
+3
 
 const showUploadModal = ref(false)
 const currentAssetType = ref({
@@ -578,6 +577,7 @@ const openUploadModal = () => {
   else showUploadModal.value = true
 }
 
+// toggle
 const openAddSingleModal = () => {
   if (showAddSingleModal.value) showAddSingleModal.value = false
   else showAddSingleModal.value = true
