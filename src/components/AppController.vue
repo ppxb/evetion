@@ -1,11 +1,13 @@
 <template>
-  <div :class="['app-controller']">
-    <div class="controller mb-4">
+  <div
+    class="absolute inset-x-0 top-0 flex flex-col items-end px-8 pt-4 bg-transparent z-[999]"
+  >
+    <div class="flex items-center mb-4">
       <app-icon name="icon-setting" type="icon" @click="openSetting" />
       <app-icon name="icon-mins" type="icon" @click="minApp" />
       <app-icon name="icon-close" type="icon" @click="closeApp" />
     </div>
-    <div class="flex flex-row w-full place-content-between items-enter">
+    <!-- <div class="flex w-full items-enter place-content-between">
       <div class="flex flex-row" v-if="showTitle">
         <div class="flex items-center mr-8">
           <app-icon name="icon-logo" type="logo" />
@@ -17,7 +19,7 @@
           <router-link
             v-for="menu in menus"
             :key="menu.path"
-            class="flex flex-row items-center mr-4 menu px-6 rounded-xl"
+            class="flex flex-row items-center mr-4 menu px-6 rounded-xl bg-transparent"
             :to="menu.path"
           >
             <app-icon
@@ -45,7 +47,7 @@
         </div>
         <app-icon name="icon-logout" @click="logout" class="mr-2" type="icon" />
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -84,24 +86,6 @@ const openSetting = () => console.log('setting panle is opened')
 </script>
 
 <style scoped>
-.app-controller {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  padding: 1rem 2rem;
-  background: transparent;
-  z-index: 999;
-}
-
-.controller {
-  display: flex;
-  align-items: center;
-}
-
 .user {
   display: flex;
   align-items: center;

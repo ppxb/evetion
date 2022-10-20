@@ -89,7 +89,7 @@ ipcMain.on('close-app', () => {
 ipcMain.on('min-app', () => win.minimize())
 
 ipcMain.on('scale-app', () => {
-  win.setContentSize(1440, 900)
+  win.setContentSize(1280, 728)
   win.center()
 })
 

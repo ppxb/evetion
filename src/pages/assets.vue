@@ -1,8 +1,7 @@
 <template>
-  <div class="flex h-screen bg-[#E7F6DF]">
-    <div
-      class="flex flex-col w-full mt-32 px-8 pt-8 rounded-tl-2xl rounded-tr-2xl bg-white content-shadow"
-    >
+  <div class="flex h-screen bg-[#F8FAFB]">
+    <AppSidebar />
+    <div class="flex flex-col w-full pl-36 pr-8 pt-16 px-12">
       <div class="flex justify-between items-end mb-2">
         <div class="text-4xl font-bold text-[#090046]">资产管理</div>
 
@@ -413,6 +412,7 @@ import {
   NGi,
   NDataTable
 } from 'naive-ui'
+import AppSidebar from '../components/AppSidebar.vue'
 import { nanoid } from 'nanoid'
 import QrcodeVue from 'qrcode.vue'
 import { toRFC3339 } from '../utils'

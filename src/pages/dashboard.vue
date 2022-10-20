@@ -1,15 +1,21 @@
 <template>
-  <div class="flex h-screen bg-[#E7F6DF]">
-    <div
-      class="flex flex-col w-full py-8 mt-32 px-12 rounded-tl-2xl rounded-tr-2xl bg-white shadow"
-    >
-      <div class="text-3xl font-bold text-gray-800 mb-1">正在开发！</div>
+  <div class="flex h-screen bg-[#F8FAFB]">
+    <AppSidebar />
+    <div class="flex flex-col w-full pl-36 pr-8 pt-16 px-12">
+      <div class="text-3xl font-bold text-gray-800">
+        <div>下午好，{{ store.user.name }}</div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
 import { onMounted } from 'vue'
+
+import AppSidebar from '../components/AppSidebar.vue'
+import useUserStore from '../store/userStore'
+
+const store = useUserStore()
 
 onMounted(async () => {
   if (window.ipc) window.ipc.scaleApp()

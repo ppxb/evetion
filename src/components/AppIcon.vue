@@ -56,12 +56,22 @@ const iconColor = computed(() => `color:${props.color}`)
   height: 2.5rem;
   -webkit-app-region: no-drag;
   color: #333;
-  margin-right: 1rem;
 }
 
 .svg-menu {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: transparent;
+  border-radius: 4px;
+  padding: 6px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   -webkit-app-region: no-drag;
+  color: rgba(0, 0, 0, 0.3);
+  margin-bottom: 12px;
+}
+
+.svg-menu:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  cursor: pointer;
 }
 </style>
