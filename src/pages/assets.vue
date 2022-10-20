@@ -585,7 +585,7 @@ const openAddSingleModal = () => {
 
 const btns = [
   { text: '添加资产', icon: 'icon-add', cb: openAddSingleModal },
-  { text: '模板下载', icon: 'icon-download', cb: openUploadModal },
+  { text: '批量导出', icon: 'icon-download', cb: openUploadModal },
   { text: '批量导入', icon: 'icon-upload', cb: openUploadModal }
 ]
 

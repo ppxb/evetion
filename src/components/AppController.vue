@@ -7,12 +7,11 @@
     </div>
     <div class="flex flex-row w-full place-content-between items-enter">
       <div class="flex flex-row" v-if="showTitle">
-        <app-icon name="icon-logo" type="logo" />
-        <div class="flex flex-col mr-16">
+        <div class="flex items-center mr-8">
+          <app-icon name="icon-logo" type="logo" />
           <div class="font-semibold text-2xl leading-none text-[#333]">
-            Evetion
+            Fiber
           </div>
-          <div class="text-gray-800">资产管理系统</div>
         </div>
         <div class="flex flex-row">
           <router-link
@@ -63,8 +62,10 @@ const showUser = ref(false)
 const showTitle = ref(false)
 
 const menus = [
-  { name: '看板', path: '/dashboard', icon: 'icon-dashboard' },
-  { name: '资产', path: '/assets', icon: 'icon-asset' }
+  { name: '个人中心', path: '/dashboard', icon: 'icon-dashboard' },
+  { name: '资产', path: '/assets', icon: 'icon-asset' },
+  { name: '项目', path: '/assets', icon: 'icon-asset' },
+  { name: '合同', path: '/assets', icon: 'icon-asset' }
 ]
 
 watchEffect(() => {
